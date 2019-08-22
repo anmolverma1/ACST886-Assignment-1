@@ -1,0 +1,74 @@
+---
+title: "ACST886 Assignment 1 Q2"
+author: "Anmol Verma"
+date: "22 August 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+Q2. As Bill and Scott have the same contract and terms, the repayment is the same.
+```{r}
+#a The amount fo annual loan repayment for Scott 
+Scottloan=annualrep
+Scottloan
+```
+
+
+
+
+As Scott has an offset account and he can utilise the interest and the principal amount to pay the home loan. The term of the loan will reduce.
+
+```{r}
+#b To find the term of loan repayment with offset account, we first create a function with the variable 'n' and then use the uniroot function to solve for the n term for loan repayment.
+loan=600000
+int=0.035
+offsetacc=100000
+loanrepay=annualrep+(offsetacc*int)
+loanrepay
+```
+
+
+
+
+
+
+
+
+```{r}
+f=function(n){
+  repayment=c(rep(loanrepay,30))
+  v=1/(1.035)^n
+  PV=sum(repayment*v)
+  return(500000-PV)
+}
+# The uniroot calculates n as 22.48 years. 
+uniroot(f,c(0,30))
+```
+So the last payment will be made 23 years later ; 19th march 2042
+
+
+
+
+2(B)
+As scott has an offset account and he can use the interest and principle to pay the
+home loan. Each payment will be larger and reduce the term of home loan. To
+include the interest from offset account as repayments, the present value of total
+loan owned is 500000 and scott need to pay the annaul payment 32622.8. the bank
+will receive 36133.8 (32633.8+3500) every year and using 500000=32622.8*𝑎𝑛 to
+find out n at 3.5%.
+```{r}
+. 
+AB22=600000*(1.035)^22-loanrepay*(((1.035^22)-1)/0.035)
+AB23=AB22*1.035
+lastpay=AB23-3500-100000
+lastpay
+```
